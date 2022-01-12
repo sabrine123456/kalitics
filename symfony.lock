@@ -121,6 +121,9 @@
     "phpdocumentor/type-resolver": {
         "version": "1.6.0"
     },
+    "phpmailer/phpmailer": {
+        "version": "v6.5.3"
+    },
     "phpspec/prophecy": {
         "version": "v1.15.0"
     },
@@ -588,6 +591,9 @@
     },
     "symfony/yaml": {
         "version": "v5.4.2"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.7.0"
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
