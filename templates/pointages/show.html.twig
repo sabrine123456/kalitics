@@ -22,9 +22,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('pointages_index') }}">back to list</a>
+    <a href="{{ path('pointages_index') }}" class="btn btn-info">Retour</a>
 
-    <a href="{{ path('pointages_edit', {'id': pointage.id}) }}">edit</a>
+    <a href="{{ path('pointages_edit', {'id': pointage.id}) }}" class="btn btn-success float-right">Modifier</a>
 
     {{ include('pointages/_delete_form.html.twig') }}
 {% endblock %}
