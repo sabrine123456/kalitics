@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des pointages{% endblock %}
+
+{% block body %}
+    <h1>Liste des pointages</h1>
+    <a href="{{ path('pointages_new') }}" class="btn btn-primary float-right">Nouveau pointage</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Durée</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pointage in pointages %}
+            <tr>
+                <td>{{ pointage.id }}</td>
+                <td>{{ pointage.date ? pointage.date|date('d/m/Y') : '' }}</td>
+                <td>{{ pointage.duree ? pointage.duree|date('H:i') : '' }}</td>
+                <td>
+                    <a href="{{ path('pointages_show', {'id': pointage.id}) }}">Afficher</a>
+                    <a href="{{ path('pointages_edit', {'id': pointage.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="alert-danger">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

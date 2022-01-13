@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des chantiers{% endblock %}
+
+{% block body %}
+    <h1>Liste des chantiers</h1>
+    <a href="{{ path('chantiers_new') }}" class="btn btn-primary float-right">Nouveau Chantier</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Date de début</th>
+                <th>Utilisateurs</th>
+                <th>Pointages</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chantier in chantiers %}
+            <tr>
+                <td>{{ chantier.id }}</td>
+                <td>{{ chantier.nom }}</td>
+                <td>{{ chantier.adresse }}</td>
+                <td>{{ chantier.dateDebut ? chantier.dateDebut|date('d/m/Y') : '' }}</td>
+                <td>
+                    {% if pointersByChantier[chantier.id] is defined %}
+                        {{ pointersByChantier[chantier.id] }}
+                    {% else %}
+                        0
+                    {% endif %}
+
+                </td>
+                <td>  --
+                   </td>
+                <td>
+                    <a href="{{ path('chantiers_show', {'id': chantier.id}) }}">Afficher</a>
+                    <a href="{{ path('chantiers_edit', {'id': chantier.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="alert-danger">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

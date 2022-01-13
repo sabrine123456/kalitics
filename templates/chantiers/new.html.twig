@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau chantier{% endblock %}
+
+{% block body %}
+    <h1>Nouveau chantier</h1>
+
+    {{ include('chantiers/_form.html.twig') }}
+
+    <a href="{{ path('chantiers_index') }}" class="btn btn-info">Retour</a>
+{% endblock %}
