@@ -39,7 +39,7 @@ class PointagesRepository extends ServiceEntityRepository
     public function findDureeByChantier()
     {
         $sql = "SELECT c.id, 
-                       SEC_TO_TIME( SUM( TIME_TO_SEC( duree ) ) ) As duree_pointage
+                       SEC_TO_TIME( SUM( TIME_TO_SEC( duree ) ) ) As duree_chantier
                 FROM pointages as p
                 LEFT JOIN chantiers as c
                     ON c.id = p.chantier_id
@@ -50,7 +50,7 @@ class PointagesRepository extends ServiceEntityRepository
                             ->fetchAll(\PDO::FETCH_ASSOC);
 
         foreach ($chantiers as $chantier) {
-            $data[$chantier['id']] = $chantier['duree_pointage'];
+            $data[$chantier['id']] = $chantier['duree_chantier'];
         }
 
         return $data ?? null;
