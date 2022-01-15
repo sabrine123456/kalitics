@@ -22,10 +22,12 @@ class ChantiersController extends AbstractController
      */
     public function index(ChantiersRepository $chantiersRepository,PointagesRepository $pointagesRepository): Response
     {
-        $pointersByChantier = $pointagesRepository->findPointersDistinctByChantier();
+        $utilisateurByChantier = $pointagesRepository->findUtilisateurByChantier();
+        $heureByChantier = $pointagesRepository->findDureeByChantier();
         return $this->render('chantiers/index.html.twig', [
             'chantiers' => $chantiersRepository->findAll(),
-            'pointersByChantier' => $pointersByChantier,
+            'UtilisateurByChantier' => $utilisateurByChantier,
+            'heureByChantier' => $heureByChantier
         ]);
     }
 

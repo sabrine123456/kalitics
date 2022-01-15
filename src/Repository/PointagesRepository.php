@@ -19,35 +19,7 @@ class PointagesRepository extends ServiceEntityRepository
         parent::__construct($registry, Pointages::class);
     }
 
-    // /**
-    //  * @return Pointages[] Returns an array of Pointages objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Pointages
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-    public function findPointersDistinctByChantier()
+    public function findUtilisateurByChantier()
     {
         $qb = $this->createQueryBuilder('p');
         $chantiers = $qb
@@ -63,4 +35,26 @@ class PointagesRepository extends ServiceEntityRepository
 
         return $data ?? null;
     }
+
+    public function findDureeByChantier()
+    {
+        $sql = "SELECT c.id, 
+                       SEC_TO_TIME( SUM( TIME_TO_SEC( duree ) ) ) As duree_pointage
+                FROM pointages as p
+                LEFT JOIN chantiers as c
+                    ON c.id = p.chantier_id
+                GROUP BY c.id";
+
+        $chantiers = $this->_em->getConnection()
+                            ->executeQuery($sql)
+                            ->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($chantiers as $chantier) {
+            $data[$chantier['id']] = $chantier['duree_pointage'];
+        }
+
+        return $data ?? null;
+    }
 }
+
+    

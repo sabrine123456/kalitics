@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
 
+    <style>
+    #pointages_form_datePointage select, #pointages_form_dureePointage select {
+        max-width:10%;
+    }
+    </style>
+{% endblock %}
 {% block title %}Liste des pointages{% endblock %}
 
 {% block body %}
     <h1>Liste des pointages</h1>
+      <div id="erreurFormDbl"></div>
+    <div id="erreurForm35h"></div>
     <a href="{{ path('pointages_new') }}" class="btn btn-primary float-right">Nouveau pointage</a>
 
     <table class="table">
